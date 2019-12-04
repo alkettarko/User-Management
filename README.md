@@ -1,3 +1,28 @@
 # Sample User-Management project for 3i-Solutions
+
+Run `UserManagementApplication.java` and check API documentation [here](http://localhost:8080/swagger-ui.html)
  
-TBD
+### Here are all Endpoints for the Application
+
+
+## Employee 
+
+ - Get all 
+ - Get By Id
+ - Create 
+ - Update [ In progress ]
+ - Delete [ In progress ]
+ - Change Department [ In progress ]
+ 
+## Department 
+
+ - Get all 
+ - Get By Id
+ - Create 
+ - Update [ In progress ]
+ - Delete [ In progress ]
+ 
+## History
+
+ - Get all [ In progress ]
+ - Get by Employee [ In progress ]
