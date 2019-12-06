@@ -10,8 +10,8 @@ Run `UserManagementApplication.java` and check API documentation [here](http://l
  - Get all 
  - Get By Id
  - Create 
- - Update [ In progress ]
- - Delete [ In progress ]
+ - Update 
+ - Delete 
  - Change Department [ In progress ]
  
 ## Department 
@@ -19,8 +19,8 @@ Run `UserManagementApplication.java` and check API documentation [here](http://l
  - Get all 
  - Get By Id
  - Create 
- - Update [ In progress ]
- - Delete [ In progress ]
+ - Update 
+ - Delete 
  
 ## History
 
