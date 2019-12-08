@@ -16,60 +16,44 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.isolutions.usermanagement.model.Department;
-import com.isolutions.usermanagement.repository.DepartmentRepository;
+import com.isolutions.usermanagement.service.DepartmentService;
 
 @RestController
 @RequestMapping("/department")
 public class DepartmentController {
 
 	@Autowired
-	private DepartmentRepository departmentRepository;
+	private DepartmentService departmentService;
 
 	@GetMapping
 	public List<Department> getDepartments() {
-		return departmentRepository.findAll();
+		return departmentService.getDepartments();
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Department> getDepartmentById(@PathVariable("id") int id) {
 
-		if (!departmentRepository.existsById(id)) {
-			return ResponseEntity.notFound().build();
-		}
-		return ResponseEntity.ok(departmentRepository.getOne(id));
+		return ResponseEntity.ok(departmentService.getDepartmentById(id));
 	}
 
 	@PostMapping
-	public Department createDepartment(@RequestBody Department department) {
+	public Department create(@RequestBody Department department) {
 
-		return departmentRepository.saveAndFlush(department);
-
+		return departmentService.create(department);
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Department> update(@RequestBody @Valid Department departmentRequest,
 			@PathVariable("id") int id) {
-		if (!departmentRepository.existsById(id)) {
-			return ResponseEntity.notFound().build();
-		}
-		Department department = departmentRepository.getOne(id);
 
-		department.setName(departmentRequest.getName());
-		department.setDescription(departmentRequest.getDescription());
-
-		return ResponseEntity.ok(departmentRepository.saveAndFlush(department));
-
+		return ResponseEntity.ok(departmentService.update(departmentRequest, id));
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Department> delete(@PathVariable("id") int id) {
-		if (!departmentRepository.existsById(id)) {
-			return ResponseEntity.notFound().build();
-		}
-		departmentRepository.deleteById(id);
 
+		departmentService.delete(id);
 		return ResponseEntity.ok().build();
-
 	}
 
 }

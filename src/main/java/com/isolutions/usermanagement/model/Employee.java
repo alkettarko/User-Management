@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 @Table(name = "EMPLOYEE")
@@ -20,6 +22,7 @@ public class Employee {
 	@Id
 	@GeneratedValue
 	@Column(name = "ID")
+	@JsonProperty(access = Access.READ_ONLY)
 	private int id;
 
 	@Column(name = "FIRSTNAME")
