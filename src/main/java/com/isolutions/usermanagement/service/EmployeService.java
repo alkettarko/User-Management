@@ -1,11 +1,13 @@
 package com.isolutions.usermanagement.service;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.isolutions.usermanagement.dto.EmployeeRequest;
 import com.isolutions.usermanagement.exception.UserManagementException;
@@ -18,7 +20,7 @@ import com.isolutions.usermanagement.repository.EmploymentHistoryRepository;
 
 @Service
 public class EmployeService {
-	
+
 	@Autowired
 	private EmployeeRepository employeeRepository;
 	@Autowired
@@ -97,6 +99,23 @@ public class EmployeService {
 		saveHistory(employee, previousDepartment);
 	}
 
+	public void uploadImage(MultipartFile image, int id) {
+
+		validateEmployeeId(id);
+
+		Employee employee = employeeRepository.getOne(id);
+
+		try {
+			employee.setImage(image.getBytes());
+			employeeRepository.saveAndFlush(employee);
+		} catch (IOException e) {
+			throw new UserManagementException("Error while uploading", HttpStatus.BAD_REQUEST);
+
+		}
+
+	}
+
+	
 	private Employee convertToEmployee(EmployeeRequest employeeRequest) {
 		Employee employee = new Employee();
 

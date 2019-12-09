@@ -12,7 +12,9 @@ Run `UserManagementApplication.java` and check API documentation [here](http://l
  - Create 
  - Update 
  - Delete 
- - Change Department [ In progress ]
+ - Change Department 
+ - Upload Image [ In progress ]
+ - Download Image
  
 ## Department 
 
@@ -24,5 +26,5 @@ Run `UserManagementApplication.java` and check API documentation [here](http://l
  
 ## History
 
- - Get all [ In progress ]
+ - Get all 
  - Get by Employee [ In progress ]

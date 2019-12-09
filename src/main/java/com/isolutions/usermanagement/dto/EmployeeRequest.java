@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class EmployeeRequest {
-
+	@NotEmpty
 	private String firstName;
 
 	private String lastName;

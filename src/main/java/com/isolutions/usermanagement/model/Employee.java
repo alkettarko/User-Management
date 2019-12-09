@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -40,13 +41,16 @@ public class Employee {
 	@Column(name = "CELLPHONE")
 	private String cellPhone;
 
+	@Lob
+	@JsonIgnore
+	@Column(name = "IMAGE")
+	private byte[] image;
+
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DEPARTMENT_ID", nullable = false)
 	private Department department;
 
-	//TODO Image
-	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -87,6 +91,14 @@ public class Employee {
 		this.cellPhone = cellPhone;
 	}
 
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
 	public Department getDepartment() {
 		return department;
 	}
@@ -94,7 +106,5 @@ public class Employee {
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
-
-	
 
 }
