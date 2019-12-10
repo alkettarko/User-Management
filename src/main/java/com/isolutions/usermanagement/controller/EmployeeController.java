@@ -25,6 +25,7 @@ import com.isolutions.usermanagement.dto.EmployeeRequest;
 import com.isolutions.usermanagement.exception.UserManagementException;
 import com.isolutions.usermanagement.model.Employee;
 import com.isolutions.usermanagement.service.EmployeService;
+import com.isolutions.usermanagement.service.EmploymentHistoryService;
 
 @RestController
 @RequestMapping("/employee")
@@ -32,6 +33,9 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeService employeeService;
+
+	@Autowired
+	private EmploymentHistoryService employmentHistoryService;
 
 	@GetMapping
 	public List<Employee> getEmployes() {
@@ -95,6 +99,13 @@ public class EmployeeController {
 		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG)
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + employee.getFirstName() + "\"")
 				.body(employee.getImage());
+	}
+
+	@GetMapping("/{id}/history")
+	public ResponseEntity<?> getHistoryByEmployee(@PathVariable("id") int employeeId) {
+	
+		Employee employee = employeeService.getEmployeeById(employeeId);
+		return ResponseEntity.ok(employmentHistoryService.getHistoryByEmployee(employee));
 	}
 
 }
