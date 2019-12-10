@@ -4,6 +4,8 @@ import org.springframework.http.HttpStatus;
 
 public class UserManagementException extends RuntimeException {
 
+	private static final long serialVersionUID = 1L;
+	
 	private String errorMessage;
 	private HttpStatus status;
 

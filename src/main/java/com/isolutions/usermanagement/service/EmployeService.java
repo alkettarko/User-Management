@@ -66,12 +66,7 @@ public class EmployeService {
 					HttpStatus.BAD_REQUEST);
 		}
 
-		Employee employee = employeeRepository.getOne(id);
-
-		employee.setEmail(employeeRequest.getEmail());
-		employee.setCellPhone(employeeRequest.getCellPhone());
-
-		return employeeRepository.saveAndFlush(employee);
+		return convertAndUpdate(employeeRequest, id);
 
 	}
 
@@ -85,7 +80,7 @@ public class EmployeService {
 		validateEmployeeId(employeeId);
 
 		if (!departmentRepository.existsById(departmentId)) {
-			throw new UserManagementException("didnt find it", HttpStatus.BAD_REQUEST);
+			throw new UserManagementException(String.format("Department with id = %s doesn't exist", departmentId), HttpStatus.BAD_REQUEST);
 		}
 
 		Employee employee = employeeRepository.getOne(employeeId);
@@ -115,7 +110,6 @@ public class EmployeService {
 
 	}
 
-	
 	private Employee convertToEmployee(EmployeeRequest employeeRequest) {
 		Employee employee = new Employee();
 
@@ -126,6 +120,17 @@ public class EmployeService {
 		employee.setCellPhone(employeeRequest.getCellPhone());
 		employee.setDepartment(departmentRepository.getOne(employeeRequest.getDepartmentId()));
 		return employee;
+	}
+
+	private Employee convertAndUpdate(EmployeeRequest employeeRequest, int id) {
+		Employee employee = employeeRepository.getOne(id);
+
+		employee.setEmail(employeeRequest.getEmail());
+		employee.setCellPhone(employeeRequest.getCellPhone());
+		employee.setFirstName(employeeRequest.getFirstName());
+		employee.setLastName(employeeRequest.getLastName());
+
+		return employeeRepository.saveAndFlush(employee);
 	}
 
 	private void saveHistory(Employee employee, Department previousDepartment) {
